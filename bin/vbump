@@ -1,0 +1,43 @@
+#!/bin/sh
+#
+# pbrisbin 2015
+#
+###
+err_usage() {
+  printf "error: %s\n" "$*" >&2
+  echo 'usage: vbump [major|minor|patch]' >&2
+  exit 64
+}
+
+split() {
+  local pattern='s/v\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(.*\)/\1 \2 \3 \4/'
+
+  sort -rV | head -n 1 | sed "$pattern"
+}
+
+bump() {
+  local major minor patch
+
+  read major minor patch _
+
+  case "$1" in
+    major)
+      major=$((major + 1))
+      minor=0
+      patch=0
+      ;;
+    minor)
+      minor=$((minor + 1))
+      patch=0
+      ;;
+    patch)
+      patch=$((patch + 1))
+      ;;
+
+    *) err_usage "invalid component: \`$1'" ;;
+  esac
+
+  printf "v%s.%s.%s\n" $major $minor $patch
+}
+
+split | bump "${1:-patch}"
