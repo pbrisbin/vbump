@@ -31,6 +31,22 @@ v1.6.0
 v2.0.0
 ```
 
-## Installation
+## Arch Installation
 
-*TODO*
+https://aur.archlinux.org/packages/vbump-git
+
+## Manual Installation
+
+To install to the default `PREFIX` of `/usr/local`:
+
+(You may need `sudo`)
+
+```
+make install
+```
+
+To install elsewhere:
+
+```
+PREFIX=/some/path make install
+```
