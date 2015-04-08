@@ -6,7 +6,7 @@ test:
 	cram test
 
 install:
-	install -Dm755 vbump $(DESTDIR)/$(PREFIX)/bin/vbump
+	install -Dm755 bin/vbump $(DESTDIR)/$(PREFIX)/bin/vbump
 
 uninstall:
 	$(RM) $(DESTDIR)/$(PREFIX)/bin/vbump
