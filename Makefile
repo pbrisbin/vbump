@@ -1,5 +1,4 @@
 NAME = vbump
-VERSION = 0.0.0
 PREFIX ?= /usr/local
 
 test:
@@ -11,4 +10,14 @@ install:
 uninstall:
 	$(RM) $(DESTDIR)/$(PREFIX)/bin/vbump
 
-.PHONY: test install uninstall
+release:
+	mkaurball
+	chruby-exec system -- aur-submit $(NAME)-git-0.0.0-1.src.tar.gz
+	$(RM) -rf $(NAME)-git-0.0.0-1.src.tar.gz
+
+distcheck:
+	makepkg --clean --install
+	$(RM) -rf vbump
+	$(RM) -rf vbump-*.pkg.tar.xz
+
+.PHONY: test install uninstall pkgver release distcheck
