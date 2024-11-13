@@ -29,3 +29,12 @@ It discards anything past patch-level
   $ echo v0.0.1.whatever | $TESTDIR/../bin/vbump
   v0.0.2
 
+It sorts its input, bumping the latest
+
+  $ printf '%s\n' \
+  > v0.1.0.pre \
+  > v0.2.0 \
+  > v0.1.1.rc \
+  > v1.5.0 \
+  > v0.0.1 | $TESTDIR/../bin/vbump
+  v1.5.1
