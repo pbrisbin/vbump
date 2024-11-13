@@ -1,8 +1,4 @@
 #!/bin/sh
-#
-# pbrisbin 2015
-#
-###
 err_usage() {
   printf "error: %s\n" "$*" >&2
   echo 'usage: vbump [major|minor|patch]' >&2
