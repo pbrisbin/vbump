@@ -2,7 +2,7 @@
 
 _gitname=vbump
 pkgname="$_gitname-git"
-pkgver=r9.a229014
+pkgver=r19.00bf9a9
 pkgrel=1
 pkgdesc='Automatically bump package versions'
 arch=('any')
