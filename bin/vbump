@@ -10,15 +10,13 @@ err_usage() {
 }
 
 split() {
-  local pattern='s/v\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(.*\)/\1 \2 \3 \4/'
+  pattern='s/v\([0-9]\+\)\.\([0-9]\+\)\.\([0-9]\+\)\(.*\)/\1 \2 \3 \4/'
 
   sort -rV | head -n 1 | sed "$pattern"
 }
 
 bump() {
-  local major minor patch
-
-  read major minor patch _
+  read -r major minor patch _
 
   case "$1" in
     major)
