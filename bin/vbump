@@ -1,8 +1,18 @@
 #!/bin/sh
-err_usage() {
-  printf "error: %s\n" "$*" >&2
-  echo 'usage: vbump [major|minor|patch]' >&2
-  exit 64
+usage() {
+  cat <<'EOM'
+Usage: vbump [--git] [major|minor|patch]
+Accept versions on stdin and print the latest version "bumped" on stdout
+
+Options:
+  --git         Don't read stdin, use the output of git-tag(1)
+
+Arguments:
+  major         vX.Y.Z  =>      v(X+1).0.0
+  minor         vX.Y.Z  =>      vX.(Y+1).0
+  patch         vX.Y.Z  =>      vX.Y.(Z+1) (default)
+
+EOM
 }
 
 split() {
@@ -27,11 +37,41 @@ bump() {
     patch)
       patch=$((patch + 1))
       ;;
-
-    *) err_usage "invalid component: \`$1'" ;;
+    *)
+      echo "impossible" >&2
+      exit 1
+      ;;
   esac
 
   printf "v%s.%s.%s\n" $major $minor $patch
 }
 
-split | bump "${1:-patch}"
+git=0
+part="patch"
+
+while [ -n "$1" ]; do
+  case "$1" in
+    -h | --help)
+      usage
+      exit 0
+      ;;
+    --git)
+      git=1
+      ;;
+    major | minor | patch)
+      part=$1
+      ;;
+    *)
+      echo "error: invalid component: \`$1'" >&2
+      echo "usage: vbump [major|minor|patch]" >&2
+      exit 64
+      ;;
+  esac
+  shift
+done
+
+if [ "$git" -eq 1 ]; then
+  git tag
+else
+  cat
+fi | split | bump "$part"
