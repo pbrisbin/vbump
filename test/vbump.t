@@ -38,3 +38,9 @@ It sorts its input, bumping the latest
   >   v1.5.0 \
   >   v0.0.1 | "$TESTDIR"/../bin/vbump
   v1.5.1
+
+It rejects empty input
+
+  $ echo | "$TESTDIR"/../bin/vbump
+  empty input
+  [1]

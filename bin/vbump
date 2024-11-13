@@ -24,6 +24,12 @@ split() {
 bump() {
   read -r major minor patch _
 
+  # Maybe we should check them all, but meh
+  if [ -z "$major" ]; then
+    echo "empty input" >&2
+    exit 1
+  fi
+
   case "$1" in
     major)
       major=$((major + 1))
