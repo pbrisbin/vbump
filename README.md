@@ -7,7 +7,7 @@ formatted version.
 
 ## Usage
 
-```
+```console
 % git tag
 v0.1.0.pre
 v0.2.0
@@ -41,12 +41,12 @@ To install to the default `PREFIX` of `/usr/local`:
 
 (You may need `sudo`)
 
-```
+```console
 make install
 ```
 
 To install elsewhere:
 
-```
+```console
 PREFIX=/some/path make install
 ```
