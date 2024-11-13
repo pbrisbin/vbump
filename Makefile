@@ -18,6 +18,6 @@ release:
 distcheck:
 	makepkg --clean --install
 	$(RM) -rf vbump
-	$(RM) -rf vbump-*.pkg.tar.xz
+	$(RM) -rf vbump-*.pkg.tar.zst
 
 .PHONY: test install uninstall pkgver release distcheck
